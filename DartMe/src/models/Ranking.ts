@@ -1,7 +1,7 @@
 import type ISerializable from "src/interfaces/ISerializable";
 import type Player from "./Player";
 
-export default class Ranking implements ISerializable {
+export default class Ranking  implements ISerializable {
     players: Array<Player> = [];
     sortDirection: string;
     sortColumn: string;
@@ -11,4 +11,5 @@ export default class Ranking implements ISerializable {
         this.sortColumn = sortCol;
         this.sortDirection = sortDir;
     }
+    
 }

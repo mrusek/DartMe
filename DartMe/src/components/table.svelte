@@ -6,7 +6,7 @@
 	import type ITableItem from 'src/interfaces/ITableItem';
 	import { createEventDispatcher } from 'svelte';
 
-	const dispatch = createEventDispatcher();
+	const dispatch = createEventDispatcher<{click:string}>();
 	let sort: 'id';
 	let sortDirection: Lowercase<keyof typeof SortValue> = 'ascending';
 	export let items: Array<ITableItem> = [];

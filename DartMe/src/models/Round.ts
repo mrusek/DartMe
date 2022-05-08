@@ -3,9 +3,9 @@ import Score from "./Score";
 
 export default class Round {
     readonly roundNumber: number;
-    readonly players: Player[];
+    readonly players: string[];
     private scores: Map<string, Score> = new Map<string, Score>();
-    constructor(roundNumber: number, players: Player[]) {
+    constructor(roundNumber: number, players: string[]) {
         this.roundNumber = roundNumber;
         this.players = players;
     }
@@ -19,6 +19,10 @@ export default class Round {
             return score;
 
         }
+    }
+
+    CreateNextRound(): Round {
+         return Object.assign(new Round(this.roundNumber + 1, this.players), this);
     }
 
 }
