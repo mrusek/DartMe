@@ -1,8 +1,10 @@
 import type ITableItem from "src/interfaces/ITableItem";
 import BaseTableItem from "./BaseTableItem";
+import GameView from "./GameView";
+import type Score from "./Score";
 
 export default class ArchiveItem extends BaseTableItem implements ITableItem {
-    constructor(id: string, playersNames: string[], gameDate: Date, winner: string, gameVersion: string, throws:number) {
+    constructor(id: string, playersNames: string[], gameDate: Date, winner: string, gameVersion: string, throws: number) {
         super();
         this.id = id;
         this.playersNames = playersNames;
@@ -16,7 +18,8 @@ export default class ArchiveItem extends BaseTableItem implements ITableItem {
     gameDate: Date = new Date();
     winner: string = '';
     gameVersion: string = '';
-    throws: number= 0;
+    scores: Map<string, Score> = new Map<string, Score>();
+    readonly throws: number = [...this.scores.values()].map(x => x.getScore()).reduce((a, b) => { return Math.max(a, b) });
 
     getCols(): Map<string, string> {
         let map = new Map<string, string>();
@@ -33,5 +36,9 @@ export default class ArchiveItem extends BaseTableItem implements ITableItem {
         return this.playersNames.length > 4 ?
             this.playersNames.slice(0, 3).concat(new Array('...')).join(',')
             : this.playersNames.join(',');
+    }
+
+    toGameView(): GameView {
+        return new GameView(this.id, this.playersNames, this.scores, this.gameDate, this.winner, this.gameVersion);
     }
 }

@@ -66,4 +66,8 @@
 	.radio-demo > :global(*) {
 		margin: 0 0.2em;
 	}
+
+		/*
+    Dodać stylowanie do pliku
+    */
 </style>

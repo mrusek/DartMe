@@ -5,17 +5,14 @@ import Round from "./Round";
 
 export default class Game implements ISerializable {
 
-    readonly id: string;
-    private players: string[];
-    private rounds: Round[];
-    readonly startDate: Date;
+    readonly id: string = Guid.newGuid();
+
+    private players: string[]= [];
+    private rounds: Round[] = new Array<Round>();
+    readonly startDate: Date = new Date(Date.now());
     private currentPlayer: string = '';
     private winner: string = '';
-    constructor(players: string[]) {
-        this.id = Guid.newGuid();
-        this.players = players;
-        this.startDate = new Date(Date.now());
-        this.rounds = new Array<Round>();
+    constructor() {
     };
 
     initializeGame(): void {
@@ -23,7 +20,6 @@ export default class Game implements ISerializable {
         this.currentPlayer = this.getNextPlayer();
 
     }
-
     startNewRound(): void {
         this.rounds.push(this.rounds.slice(-1)[0].CreateNextRound());
     }
